@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '../components/layout/Navbar';
 import { ProfileSidebar } from '../components/layout/ProfileSidebar';
+import { MobileNavSidebar } from '../components/layout/MobileNavSidebar';
 import { TimesheetView } from './TimesheetView';
 import { TeamView } from './TeamView';
 import { AdminView } from './AdminView';
@@ -10,6 +11,7 @@ import { AdminView } from './AdminView';
 export const Dashboard = (props) => {
   const { activeTab, setActiveTab } = props;
   const [showProfile, setShowProfile] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   const renderActiveView = () => {
     switch (activeTab) {
@@ -60,7 +62,21 @@ export const Dashboard = (props) => {
         setActiveTab={setActiveTab}
         onLogout={props.onLogout}
         onProfileClick={() => setShowProfile(true)}
+        onMenuClick={() => setShowMobileNav(true)}
       />
+
+      <AnimatePresence>
+        {showMobileNav && (
+          <MobileNavSidebar
+            user={props.user}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            onLogout={props.onLogout}
+            onProfileClick={() => setShowProfile(true)}
+            onClose={() => setShowMobileNav(false)}
+          />
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {showProfile && (

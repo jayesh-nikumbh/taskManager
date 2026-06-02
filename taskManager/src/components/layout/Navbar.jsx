@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, Lock, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Lock, LogOut, Menu } from 'lucide-react';
 import { Logo } from '../common/Logo';
 import { NavBtn } from '../common/NavBtn';
 import { UserAvatar } from '../common/UserAvatar';
 
-export const Navbar = ({ user, activeTab, setActiveTab, onLogout, onProfileClick }) => {
+export const Navbar = ({ user, activeTab, setActiveTab, onLogout, onProfileClick, onMenuClick }) => {
   const isAdmin = user.role === 'admin' || user.name === 'admin';
 
   return (
@@ -17,7 +17,8 @@ export const Navbar = ({ user, activeTab, setActiveTab, onLogout, onProfileClick
       <div className="max-w-7xl mx-auto glass px-4 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-2xl bg-slate-950/60 border-white/5 backdrop-blur-2xl">
         <Logo size={22} />
         <div className="flex items-center gap-4 md:gap-8">
-          <div className="flex items-center gap-4 md:gap-6">
+          {/* Desktop Navigation Tabs */}
+          <div className="hidden md:flex items-center gap-4 md:gap-6">
             {user.role !== 'admin' && (
               <NavBtn
                 icon={<LayoutDashboard size={16} />}
@@ -41,8 +42,10 @@ export const Navbar = ({ user, activeTab, setActiveTab, onLogout, onProfileClick
               />
             )}
           </div>
-          <div className="h-6 w-px bg-white/10 hidden xs:block" />
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="h-6 w-px bg-white/10 hidden md:block" />
+          
+          {/* Desktop User Profile & Logout */}
+          <div className="hidden md:flex items-center gap-3 md:gap-4">
             <button 
               onClick={onProfileClick}
               className="flex items-center gap-3 group cursor-pointer hover:bg-white/5 px-3 py-2 rounded-2xl transition-all"
@@ -68,6 +71,15 @@ export const Navbar = ({ user, activeTab, setActiveTab, onLogout, onProfileClick
               <LogOut size={16} />
             </button>
           </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            onClick={onMenuClick}
+            className="md:hidden w-10 h-10 rounded-xl cursor-pointer glass flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+            title="Menu"
+          >
+            <Menu size={20} />
+          </button>
         </div>
       </div>
     </motion.nav>
@@ -85,4 +97,5 @@ Navbar.propTypes = {
   setActiveTab: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onProfileClick: PropTypes.func.isRequired,
+  onMenuClick: PropTypes.func.isRequired,
 };

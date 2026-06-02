@@ -64,7 +64,7 @@ export const LoginView = memo(({ onLogin }) => {
   };
 
   return (
-    <div className="h-dvh w-full flex flex-col lg:flex-row bg-slate-950 relative selection:bg-indigo-500/30 overflow-hidden">
+    <div className="min-h-screen lg:h-dvh w-full flex flex-col lg:flex-row bg-slate-950 relative selection:bg-indigo-500/30 overflow-y-auto lg:overflow-hidden">
       {/* Decorative background elements */}
       <BackgroundOrbs />
 
@@ -132,7 +132,7 @@ export const LoginView = memo(({ onLogin }) => {
       </motion.div>
 
       {/* Authentication Form Section */}
-      <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative z-30 overflow-hidden">
+      <div className="flex-1 flex items-center justify-center p-4 xs:p-6 md:p-12 relative z-30 py-12 lg:py-0">
         <div className="w-full max-w-md xl:max-w-lg">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }} 
@@ -142,7 +142,7 @@ export const LoginView = memo(({ onLogin }) => {
           >
             <div className="absolute -inset-1 bg-linear-to-r from-indigo-500/10 to-violet-500/10 rounded-[40px] blur-xl opacity-0 group-hover/panel:opacity-100 transition-opacity duration-700" />
             
-            <div className="glass-card bg-slate-900/60 p-8 md:p-10 xl:p-14 border border-white/5 rounded-[36px] xl:rounded-[40px] shadow-2xl relative overflow-hidden ring-1 ring-white/5">
+            <div className="glass-card bg-slate-900/60 p-6 xs:p-8 md:p-10 xl:p-14 border border-white/5 rounded-[28px] xs:rounded-[36px] xl:rounded-[40px] shadow-2xl relative overflow-hidden ring-1 ring-white/5">
               <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-indigo-600 to-violet-600 opacity-60" />
               
               <div className="mb-6 xl:mb-10">

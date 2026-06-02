@@ -6,6 +6,7 @@
   --color-slate-950: #020617;
   --color-slate-900: #0f172a;
   --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
+  --breakpoint-xs: 475px;
 }
 
 @layer base {
