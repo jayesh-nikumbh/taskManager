@@ -5,7 +5,11 @@ const nodemailer = require('nodemailer');
  * @param {Object} options - { email, subject, message }
  */
 const sendEmail = async (options) => {
-  // Create a transporter with timeouts to prevent the request from hanging
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    throw new Error('EMAIL_USER and EMAIL_PASS environment variables are not set in the server environment!');
+  }
+
+  // Create a transporter with timeouts and IPv4 forcing to prevent hanging on Render
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
@@ -14,6 +18,7 @@ const sendEmail = async (options) => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    family: 4,                 // Force IPv4 to bypass Render's IPv6 resolution hangs
     connectionTimeout: 5000,   // 5 seconds connection timeout
     greetingTimeout: 5000,     // 5 seconds greeting timeout
     socketTimeout: 8000,       // 8 seconds socket inactivity timeout
