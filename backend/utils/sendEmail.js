@@ -1,4 +1,8 @@
 const nodemailer = require('nodemailer');
+const dns = require('node:dns');
+
+// Force DNS resolution to prioritize IPv4 over IPv6, resolving Render outbound ENETUNREACH issues.
+dns.setDefaultResultOrder('ipv4first');
 
 /**
  * Sends an email using Nodemailer
