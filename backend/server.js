@@ -16,10 +16,16 @@ app.disable('x-powered-by'); // Security: Disable X-Powered-By header to prevent
 /**
  * Global Middleware
  */
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173', // Restrict CORS to frontend URL
-  credentials: true
-})); // Enable Cross-Origin Resource Sharing with security config
+// app.use(cors({
+//   origin: process.env.CLIENT_URL || 'http://localhost:5173', // Restrict CORS to frontend URL
+//   credentials: true
+// }));  // Enable Cross-Origin Resource Sharing with security config
+app.use(
+  cors({
+    origin: "https://task-manager-yuz2.onrender.com",
+    credentials: true,
+  })
+);
 app.use(express.json()); // Parse JSON request bodies
 
 /**
