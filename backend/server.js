@@ -22,7 +22,10 @@ app.disable('x-powered-by'); // Security: Disable X-Powered-By header to prevent
 // }));  // Enable Cross-Origin Resource Sharing with security config
 app.use(
   cors({
-    origin: "https://task-manager-yuz2.onrender.com",
+    origin: [
+      "https://task-manager-6ici.onrender.com",
+      "https://task-manager-yuz2.onrender.com"
+    ],
     credentials: true,
   })
 );
