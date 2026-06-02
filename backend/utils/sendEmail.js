@@ -5,13 +5,18 @@ const nodemailer = require('nodemailer');
  * @param {Object} options - { email, subject, message }
  */
 const sendEmail = async (options) => {
-  // Create a transporter
+  // Create a transporter with timeouts to prevent the request from hanging
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for 587
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    connectionTimeout: 5000,   // 5 seconds connection timeout
+    greetingTimeout: 5000,     // 5 seconds greeting timeout
+    socketTimeout: 8000,       // 8 seconds socket inactivity timeout
   });
 
   // Define email options
