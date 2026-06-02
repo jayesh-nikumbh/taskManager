@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const dns = require('node:dns');
 require('dotenv').config();
+
+// Prioritize IPv4 DNS resolution globally to prevent outbound IPv6 connection errors on cloud hosts like Render.
+dns.setDefaultResultOrder('ipv4first');
 
 const connectDB = require('./config/db');
 const taskRoutes = require('./routes/taskRoutes');
