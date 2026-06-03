@@ -50,6 +50,10 @@ export const AdminView = ({ showToast, tasks, user, onUpdateUser }) => {
 
   const handleAddUser = async (e) => {
     e.preventDefault();
+    if (formData.password.length < 6) {
+      showToast('Password must be at least 6 characters long', 'error');
+      return;
+    }
     try {
       const data = await registerUser(formData);
       if (data.success) {
@@ -67,6 +71,10 @@ export const AdminView = ({ showToast, tasks, user, onUpdateUser }) => {
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
+    if (formData.password && formData.password.trim() !== '' && formData.password.length < 6) {
+      showToast('Password must be at least 6 characters long', 'error');
+      return;
+    }
     try {
       const token = localStorage.getItem('tm_token');
       const data = await updateUserApi(editingUser._id, formData, token);
@@ -423,6 +431,7 @@ const AdminModal = ({ isOpen, isEdit, formData, setFormData, showPassword, setSh
                     onChange={e => setFormData({ ...formData, password: e.target.value })} 
                     className="w-full px-6 py-4 bg-slate-950/80 border border-white/5 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-semibold" 
                     required={!isEdit}
+                    minLength={6}
                     autoComplete="new-password"
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-600 hover:text-indigo-400 transition-colors cursor-pointer">
